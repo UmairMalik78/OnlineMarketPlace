@@ -1,0 +1,91 @@
+﻿@layout EmptyLayout
+@page "/updateproduct"
+    
+<!--Seller Update Product-->
+<!--<div class="container-fluid bg-light" style="padding-top: 2%;">
+    <div class="bg-dark" style="padding: 1%; margin-left: 10%; margin-right: 10%; margin-bottom: 3%; border-radius: 5px;">
+        <div style="padding: 1%; border: 1px dashed gray;background-color: #FCECEC; border-radius: 5px;">
+            <p>Home>Add Products>Update Product</p>
+            <div class="text-center">
+                <h2>Update Products</h2>
+            </div>
+        </div>
+    </div>-->
+    <!--Seller Dashboard main Head-->
+    <!--<div class="form" style="padding-left: 10%; padding-right: 10%;">
+        <h4>Product Details</h4>
+        <div class="row">
+            <div class="col-md-3 image-upload-wrap">
+                <input class="file-upload-input" type="file" onchange="readURL(this);" accept="image/*">
+            </div>
+            <div class="col-md-3 image-upload-wrap">
+                <input type="file" accept="image/*">
+            </div>
+            <div class="col-md-3 image-upload-wrap">
+                <input type="file" accept="image/*">
+            </div>
+        </div>
+        <EditForm Model="@updateProduct" OnValidSubmit="submitForm">
+            <DataAnnotationsValidator></DataAnnotationsValidator>
+            <div class="form-group">
+                <label for="Name"><b>Name:</b></label>
+                <InputText id="name" @bind-Value="updateProduct.Name" class="form-control" placeholder="Enter product name"></InputText>
+                <ValidationMessage For="@(()=> updateProduct.Name)" />
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="Price"><b>Price:</b></label>
+                    <InputNumber id="price" @bind-Value="updateProduct.Price" class="form-control" placeholder="Enter product price"></InputNumber>
+                    <ValidationMessage For="@(()=> updateProduct.Price)" />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="Quantity"><b>Quantity:</b></label>
+                    <InputNumber id="quantity" @bind-Value="updateProduct.Quantity" class="form-control" placeholder="Enter product Quantity"></InputNumber>
+                    <ValidationMessage For="@(()=> updateProduct.Quantity)" />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="catagory"><b>Category:</b></label>
+                    <select class="form-control" id="catagory">
+                        <option>Food</option>
+                        <option>Women</option>
+                        <option>Men</option>
+                        <option>Kids</option>
+                        <option>Mobile</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="discription"><b>Description:</b></label>
+                <InputText id="comment" @bind-Value="updateProduct.Discription" class="form-control" row="3"></InputText>
+                <ValidationMessage For="@(()=> updateProduct.Discription)" />
+            </div>
+            <br>
+            <div class="text-center">
+                <button class="btn btn-primary">Add Product</button>
+            </div>
+        </EditForm>
+    </div><br>
+</div>
+
+@code{
+    void submitForm()
+    {
+
+    }
+
+    UpadteProduct updateProduct = new UpadteProduct();
+    public class UpdateProduct
+    {
+        [Required]
+        [StringLength(100, ErrorMessage = "Name is Required")]
+        public string Name { get; set; }
+        [Required]
+        [Range(0, 9999, ErrorMessage = "Price must be between 0 and 9999")]
+        public int Price { get; set; }
+        [Required]
+        [Range(0, 99, ErrorMessage = "Quantity must be between 0 and 99")]
+        public int Quantity { get; set; }
+        [Required]
+        public string Discription { get; set; }
+    }
+}-->

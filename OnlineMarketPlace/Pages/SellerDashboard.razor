@@ -1,0 +1,218 @@
+﻿@layout MainLayout
+@page "/sellerDashboard"
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject NavigationManager NavManager
+<!--Seller Dashboard-->
+<button @onclick="logout" class="btn btn-primary mx-5 mt-4">Logout</button>
+<div class="bg-light py-2">
+    <div class="bg-dark m-4 p-4" style="border-radius: 15px;">
+        <div class="p-4 text-center" style="border-radius: 15px;background-color: #FCECEC;">
+            <h2>Seller Dashboard</h2>
+        </div>
+    </div>
+    <h2 class="px-5 text-center">Products</h2>
+
+    <!--Seller Product Table-->
+    <div class="table-responsive px-5">
+        <div style="height: 250px;">
+            <table class="table table-bordered text-center" style="overflow-x:auto;overflow-y: auto;">
+                <thead>
+                    <tr class="bg-dark text-light">
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-light text-dark">
+                    <tr>
+                        <td>Black Shoes</td>
+                        <td>Men</td>
+                        <td>10</td>
+                        <td>Rs. 1999</td>
+                        <td>
+                            <a href="updateProduct.html" class="btn btn-warning" role="button">Update</a>
+                            <button class="btn btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Red T-Shirt</td>
+                        <td>Men</td>
+                        <td>20</td>
+                        <td>Rs. 799</td>
+                        <td>
+                            <a href="updateProduct.html" class="btn btn-warning" role="button">Update</a>
+                            <button class="btn btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Red T-Shirt</td>
+                        <td>Men</td>
+                        <td>20</td>
+                        <td>Rs. 799</td>
+                        <td>
+                            <a href="updateProduct.html" class="btn btn-warning" role="button">Update</a>
+                            <button class="btn btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Red T-Shirt</td>
+                        <td>Men</td>
+                        <td>20</td>
+                        <td>Rs. 799</td>
+                        <td>
+                            <a href="updateProduct.html" class="btn btn-warning" role="button">Update</a>
+                            <button class="btn btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Red T-Shirt</td>
+                        <td>Men</td>
+                        <td>20</td>
+                        <td>Rs. 799</td>
+                        <td>
+                            <a href="updateProduct.html" class="btn btn-warning" role="button">Update</a>
+                            <button class="btn btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Black Shoes</td>
+                        <td>Men</td>
+                        <td>10</td>
+                        <td>Rs. 1999</td>
+                        <td>
+                            <a href="updateProduct.html" class="btn btn-warning" role="button">Update</a>
+                            <button class="btn btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Black Shoes</td>
+                        <td>Men</td>
+                        <td>10</td>
+                        <td>Rs. 1999</td>
+                        <td>
+                            <a href="updateProduct.html" class="btn btn-warning" role="button">Update</a>
+                            <button class="btn btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--Seller Add Products-->
+<div class="container-fluid bg-light py-2">
+    <div class="form px-5 py-0">
+        <h4>Enter Product Details</h4>
+        <br>
+        <div class="row text-center">
+            <div class="col-md-4 image-upload-wrap">
+                <input class="file-upload-input" type="file" onchange="readURL(this);" accept="image/*">
+            </div>
+            <div class="col-md-4 image-upload-wrap">
+                <input type="file" accept="image/*">
+            </div>
+            <div class="col-md-4 image-upload-wrap">
+                <input type="file" accept="image/*">
+            </div>
+        </div>
+        <EditForm Model="@product" OnValidSubmit="submitForm">
+            <DataAnnotationsValidator></DataAnnotationsValidator>
+            <div class="form-group">
+                <label for="Name"><b>Name:</b></label>
+                <InputText id="name" @bind-Value="product.Name" class="form-control" placeholder="Enter product name"></InputText>
+                <ValidationMessage For="@(()=> product.Name)" />
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="Price"><b>Price:</b></label>
+                    <InputNumber id="price" @bind-Value="product.Price" class="form-control" placeholder="Enter product price"></InputNumber>
+                    <ValidationMessage For="@(()=> product.Price)" />
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="Quantity"><b>Quantity:</b></label>
+                    <InputNumber id="quantity" @bind-Value="product.Quantity" class="form-control" placeholder="Enter product Quantity"></InputNumber>
+                    <ValidationMessage For="@(()=> product.Quantity)" />
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="catagory"><b>Category:</b></label>
+                    <select class="form-control" id="catagory">
+                        <option>Food</option>
+                        <option>Women</option>
+                        <option>Men</option>
+                        <option>Kids</option>
+                        <option>Mobile</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Model</label>
+                    <input @bind-value="@product.Model" placeholder="Enter Model..." />
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Manufacturer</label>
+                    <input @bind-value="@product.Manufacturer" placeholder="Enter Manufacturer..." />
+                </div>
+                @*                <div class="form-group col-md-3">
+            <label for="manf"><b>Manufacturer:</b></label>
+            <InputNumber id="manf" @bind-Value="product.Manufacturer" class="form-control" placeholder="Enter product price"></InputNumber>
+            <ValidationMessage For="@(()=> product.Manufacturer)" />
+        </div>
+                *@
+            </div>
+            <div class="form-group">
+                <label for="discription"><b>Description:</b></label>
+                <InputText id="comment" @bind-Value="product.Discription" class="form-control" row="3"></InputText>
+                <ValidationMessage For="@(()=> product.Discription)" />
+            </div>
+@*            <div class="form-group col-md-4">
+                <label for="model"><b>Model:</b></label>
+                <InputNumber id="model" @bind-Value="product.Model" class="form-control" placeholder="Enter product price"></InputNumber>
+                <ValidationMessage For="@(()=> product.Model)" />
+            </div>
+*@            <br>
+            <div class="text-center">
+                <button class="btn btn-primary">Add Product</button>
+            </div>
+        </EditForm>
+    </div><br>
+</div>
+
+@code{
+    void submitForm()
+    {
+
+    }
+    async void logout()
+    {
+        await sessionStorage.ClearAsync();
+        NavManager.NavigateTo("/sellerSignIn");
+    }
+
+    ProductForm product= new ProductForm();
+    public class ProductForm
+    {
+        [Required]
+        [StringLength(100, ErrorMessage = "Name is Required")]
+        public string Name { get; set; }
+        [Required]
+        [Range(0, 9999, ErrorMessage = "Price must be between 0 and 9999")]
+        public int Price { get; set; }
+        [Required]
+        [Range(0, 99, ErrorMessage = "Quantity must be between 0 and 99")]
+        public int Quantity { get; set; }
+        [Required]
+        public string Discription { get; set; }
+        [Required]
+        [StringLength(100, ErrorMessage = "Manufacturer is Required")]
+        public string Manufacturer { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "Model is Required")]
+        public string Model { get; set; }
+    }
+}
+@code{
+
+
+}
